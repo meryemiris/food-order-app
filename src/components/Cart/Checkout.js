@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import classes from "./Checkout.module.css";
 import CheckoutInput from "./CheckoutInput";
 
@@ -13,22 +13,16 @@ export default function Checkout(props) {
     city: true,
   });
 
-  const nameInputRef = useRef();
-  const streetInputRef = useRef();
-  const postalInputRef = useRef();
-  const cityInputRef = useRef();
-
-  console.log(nameInputRef);
-
   function confirmHandler(event) {
     event.preventDefault();
 
-    const nameInput = nameInputRef.current.value;
-    const streetInput = streetInputRef.current.value;
-    const postalInput = postalInputRef.current.value;
-    const cityInput = cityInputRef.current.value;
+    const formData = new FormData(event.target);
+    const userData = Object.fromEntries(formData.entries());
 
-    console.log(nameInput.current);
+    const nameInput = userData.name;
+    const streetInput = userData.name;
+    const postalInput = userData.postal;
+    const cityInput = userData.city;
 
     const nameInputIsValid = !isEmpty(nameInput);
     const streetInputIsValid = !isEmpty(streetInput);
@@ -83,7 +77,7 @@ export default function Checkout(props) {
         className={nameControlClasses}
         label="Your Name"
         id="name"
-        ref={nameInputRef}
+        name="name"
         validity={!formInputsValidity.name}
       />
 
@@ -91,21 +85,22 @@ export default function Checkout(props) {
         className={streetControlClasses}
         label="Street"
         id="street"
-        ref={streetInputRef}
+        name="street"
+        re
         validity={!formInputsValidity.street}
       />
       <CheckoutInput
         className={postalControlClasses}
         label="Postal Code"
         id="postal"
-        ref={postalInputRef}
+        name="postal"
         validity={!formInputsValidity.postal}
       />
       <CheckoutInput
         className={cityControlClasses}
         label="City"
         id="city"
-        ref={cityInputRef}
+        name="city"
         validity={!formInputsValidity.city}
       />
 
