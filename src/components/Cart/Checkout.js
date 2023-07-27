@@ -18,16 +18,10 @@ export default function Checkout(props) {
   const postalInputRef = useRef();
   const cityInputRef = useRef();
 
-  useEffect(() => {
-    const element = nameInputRef.current;
-    console.log(element); // 👈️ element here
-  }, []);
-
   console.log(nameInputRef);
 
   function confirmHandler(event) {
     event.preventDefault();
-    console.log(new FormData(event.target));
 
     const nameInput = nameInputRef.current.value;
     const streetInput = streetInputRef.current.value;
